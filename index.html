@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="ms">
 <head>
     <meta charset="UTF-8">
@@ -41,89 +40,215 @@
             font-weight: 400;
         }
         
-        /* Layout Grid */
-        .timeline-grid {
+        /* ---------------------------------------------------- */
+        /* ZOOM-PROOF ROW-BASED TIMELINE LAYOUT                 */
+        /* ---------------------------------------------------- */
+        
+        .timeline-container {
+            display: flex;
+            flex-direction: column-reverse; /* Stacks rows bottom-to-top (Chronological) */
+            width: 100%;
+        }
+        
+        .timeline-row {
             display: grid;
-            grid-template-columns: 200px 60px 730px;
-            width: fit-content;
-            margin: 0 auto;
+            grid-template-columns: 200px 80px 1fr;
             position: relative;
+            width: 100%;
         }
-
-        /* Left Column: Accreditation Tracks */
-        .accreditation-column {
+        
+        /* --- Left Column: Accreditation Tracks --- */
+        .cell-acc {
             position: relative;
-            padding-right: 20px;
-            height: 100%;
+            padding: 20px 30px 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
         }
-
-        .acc-line-container {
+        
+        /* Shared dynamic track properties */
+        .mqa-active .cell-acc::before, .mbot-active .cell-acc::before {
+            content: '';
             position: absolute;
-            right: 10px;
-            top: 0;
-            bottom: 0;
-            width: 50px;
-        }
-
-        .acc-line {
-            position: absolute;
+            right: 14px; /* Perfectly aligned vertically */
             width: 6px;
-            border-radius: 3px;
-            left: 22px;
+            z-index: 1;
         }
-
-        .acc-line.mqa {
-            background-color: #e67e22;
-            bottom: 760px;
-            top: 1320px;
-        }
-
-        .acc-line.mbot {
-            background-color: #2ecc71;
-            bottom: 1340px;
-            top: 10px;
-        }
-
+        
+        /* MQA Track Logic */
+        .mqa-active .cell-acc::before { background-color: #e67e22; top: 0; bottom: 0; }
+        /* Because flex-direction is column-reverse, "start" connects UP (Top half) and "end" connects DOWN (Bottom half) */
+        .mqa-start .cell-acc::before { top: 0; bottom: 50%; border-radius: 0 0 3px 3px; }
+        .mqa-end .cell-acc::before { top: 50%; bottom: 0; border-radius: 3px 3px 0 0; }
+        
+        /* MBOT Track Logic */
+        .mbot-active .cell-acc::before { background-color: #2ecc71; top: 0; bottom: 0; }
+        .mbot-start .cell-acc::before { top: 0; bottom: 50%; border-radius: 0 0 3px 3px; }
+        .mbot-end .cell-acc::before { top: 50%; bottom: 0; border-radius: 3px 3px 0 0; }
+        
         .acc-label {
-            position: absolute;
+            position: relative;
+            z-index: 2;
             font-size: 13px;
-            white-space: nowrap;
             background: #fff;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            z-index: 5;
-            left: -130px;
-            transform-origin: center center;
-        }
-        
-        .acc-label.mqa-lbl {
-            bottom: 1100px;
-            border-color: #e67e22;
-            color: #e67e22;
             text-align: center;
         }
-        
-        .acc-label.mbot-lbl {
-            bottom: 1900px;
-            border-color: #2ecc71;
-            color: #2ecc71;
-            text-align: center;
-        }
+        .acc-label.mqa-lbl { border-color: #e67e22; color: #e67e22; }
+        .acc-label.mbot-lbl { border-color: #2ecc71; color: #2ecc71; }
 
-        /* Center Column: Spine Line with Highlighted Years Over It */
-        .spine-column {
+        /* --- Center Column: Continuous Spine --- */
+        .cell-spine {
             position: relative;
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
+            padding: 20px 0;
         }
-        .spine-line {
+        
+        .cell-spine::before {
+            content: '';
             position: absolute;
-            top: 0;
-            bottom: 0;
+            top: 0; bottom: 0;
             width: 4px;
             background-color: #dee2e6;
             z-index: 1;
+        }
+        
+        /* Cap the spine line at the first and last dots */
+        .timeline-row:first-child .cell-spine::before { top: 0; bottom: 50%; }
+        .timeline-row:last-child .cell-spine::before { top: 50%; bottom: 0; }
+        
+        .year-marker {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            background-color: black;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 7px 10px;
+            border-radius: 20px;
+            border: 3px solid #ffffff;
+        }
+        
+        .program-marker {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            background-color: rgb(234, 218, 249);
+            color: blueviolet;
+            font-size: 17px;
+            font-weight: bold;
+            padding: 7px 10px;
+            border-radius: 20px;
+            border: 3px solid blueviolet;
+        }
+
+        /* --- Right Column: Milestones --- */
+        .cell-milestone {
+            position: relative;
+            padding: 25px 0 25px 20px;
+            display: flex;
+            align-items: center; /* Locks the horizontal connector to the vertical center */
+        }
+        
+        .horizontal-connector {
+            width: 20px;
+            height: 2px;
+            background-color: #0056b3;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+        
+        .horizontal-connector::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: -5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #0056b3;
+        }
+        
+        .milestone-box {
+            background: #fff;
+            border: 1px solid #e1e8ed;
+            border-left: 5px solid #0056b3;
+            border-radius: 8px;
+            padding: 20px;
+            width: 100%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            transition: transform 0.2s;
+        }
+        
+        .milestone-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .milestone-date {
+            font-weight: bold;
+            color: #0056b3;
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        
+        .program-name-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 0 0 5px 0;
+        }
+        
+        .program-name-en {
+            font-size: 15px;
+            font-style: italic;
+            color: #7f8c8d;
+            margin-bottom: 12px;
+        }
+        
+        .milestone-details {
+            margin: 10px 0 0 0;
+            padding-left: 20px;
+        }
+        
+        .milestone-details li {
+            margin-bottom: 6px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .doc-link {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 12px;
+            margin-right: 10px;
+            padding: 6px 12px;
+            background-color: #eef5fc;
+            color: #0056b3;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .doc-link:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+        
+        .doc-link svg {
+            margin-right: 6px;
+            fill: currentColor;
         }
 
         .new-item {
@@ -142,214 +267,45 @@
             vertical-align: middle;
         }
 
-        /* Continuous Vertical Scale Overlaid on the Spine Line */
-        .timeline-scale {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-            display: flex;
-            flex-direction: column-reverse;
-            z-index: 3; /* Places it cleanly above the spine line */
-        }
+        /* Milestone overrides */
+        .timeline-row.node-turquoise .milestone-box { border-left-color: rgb(37, 178, 164); }
+        .timeline-row.node-turquoise .milestone-date { color: rgb(37, 178, 164); }
+        .timeline-row.node-turquoise .horizontal-connector { background-color: rgb(37, 178, 164); }
+        .timeline-row.node-turquoise .horizontal-connector::before { background-color: rgb(37, 178, 164); }
 
-        .year-marker {
-            text-align: center;
-            background-color: black;
-            color: #ffffff;
-            font-size: 12px;
-            font-weight: bold;
-            padding: 7px 10px;
-            border-radius: 20px;
-            border: 3px solid #ffffff;
-        }
-
-        .program-marker {
-            text-align: center;
-            background-color: rgb(234, 218, 249);
-            color: blueviolet;
-            font-size: 17px;
-            font-weight: bold;
-            padding: 7px 10px;
-            border-radius: 20px;
-            border: 3px solid blueviolet;
-        }
-
-        /* Right Column: Milestones */
-        .milestone-column {
-            display: flex;
-            flex-direction: column-reverse;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .milestone-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 40px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* The horizontal connector line from center spine to the box */
-        .horizontal-connector {
-            width: 30px;
-            height: 2px;
-            background-color: #0056b3;
-            margin-left: -50px;
-            margin-right: 12px;
-            position: relative;
-        }
-        .horizontal-connector::before {
-            content: '';
-            position: absolute;
-            left: -6px;
-            top: -5px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: #0056b3;
-        }
-
-        /* Milestone Card Box */
-        .milestone-box {
-            background: #fff;
-            border: 1px solid #e1e8ed;
-            border-left: 5px solid #0056b3;
-            border-radius: 8px;
-            padding: 20px;
-            width: 100%;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-            transition: transform 0.2s;
-        }
-        .milestone-box:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-
-        .milestone-date {
-            font-weight: bold;
-            color: #0056b3;
-            font-size: 14px;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
-        .program-name-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #2c3e50;
-            margin: 0 0 5px 0;
-        }
-        .program-name-en {
-            font-size: 15px;
-            font-style: italic;
-            color: #7f8c8d;
-            margin-bottom: 12px;
-        }
-        .milestone-details {
-            margin: 10px 0 0 0;
-            padding-left: 20px;
-        }
-        .milestone-details li {
-            margin-bottom: 6px;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-        .doc-link {
-            display: inline-flex;
-            align-items: center;
-            margin-top: 12px;
-            padding: 6px 12px;
-            background-color: #eef5fc;
-            color: #0056b3;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-        .doc-link:hover {
-            background-color: #0056b3;
-            color: #fff;
-        }
-        .doc-link svg {
-            margin-right: 6px;
-            fill: currentColor;
-        }
-
-        .node-change {
-            border-left-color: #9b59b6;
-        }
-        .node-change .milestone-date {
-            color: #9b59b6;
-        }
-        .node-change .horizontal-connector {
-            background-color: #9b59b6;
-        }
-        .node-change .horizontal-connector::before {
-            background-color: #9b59b6;
-        }
-
-        .node-turquoise {
-            border-left-color: rgb(37, 178, 164);
-        }
-        .node-turquoise .milestone-date {
-            color: rgb(37, 178, 164);
-        }
-        .node-turquoise .horizontal-connector {
-            background-color: rgb(37, 178, 164);
-        }
-        .node-turquoise .horizontal-connector::before {
-            background-color: rgb(37, 178, 164);
-        }
-
-        /* Responsive design */
+        /* Responsive Design */
         @media (max-width: 992px) {
-            .timeline-grid {
-                grid-template-columns: 1fr;
+            .timeline-container { 
+                flex-direction: column-reverse; 
             }
-            .accreditation-column {
-                display: block;
-                padding-right: 0;
-                margin-bottom: 30px;
-                border-bottom: 2px dashed #dee2e6;
-                padding-bottom: 20px;
-                height: auto;
-                position: static;
-            }
-            .timeline-scale {
-                position: static;
+            .timeline-row {
+                display: flex;
                 flex-direction: column;
-                height: auto;
+                margin-bottom: 25px;
+                background: #fdfdfd;
+                border-radius: 8px;
+                border: 1px solid #eaeaea;
             }
-
-            .acc-line-container {
-                display: block;
-                position: relative;
-                width: 100%;
-                height: auto;
-                margin-top: 15px;
+            .cell-acc::before, .cell-spine::before {
+                display: none; /* Hide vertical tracks */
             }
-            .acc-line {
-                display: none;
+            .cell-acc {
+                padding: 15px;
+                justify-content: flex-start;
+                border-bottom: 2px dashed #dee2e6;
             }
-            .acc-label {
-                position: static;
-                display: inline-block;
-                margin-top: 5px;
-                margin-right: 10px;
-                transform: none;
+            .cell-spine {
+                padding: 15px 15px 0 15px;
+                align-items: flex-start;
             }
-            .spine-column {
-                display: none;
-            }
-            .milestone-column {
-                padding-left: 0;
+            .cell-milestone {
+                padding: 15px;
             }
             .horizontal-connector {
                 display: none;
             }
-            .milestone-box {
-                border-left-width: 5px;
+            .timeline-row.empty-milestone {
+                display: none; /* Hide year-only rows cleanly on mobile */
             }
         }
     </style>
@@ -362,52 +318,17 @@
         <h2>2009 - 2026</h2>
     </header>
 
-    <div class="timeline-grid">
-        <!-- Left Column: Accreditation Coverage Lines -->
-        <div class="accreditation-column">
-            <div class="acc-line-container">
-                <!-- MQA Line covering 2012 to 2021 -->
-                <div class="acc-line mqa"></div>
-                <div class="acc-label mqa-lbl">
-                    <b>MQA</b> 
-                    <div style="color: black; padding: 3px;">01/08/2012 - 31/12/2021</div>
-                    <a href="https://www2.mqa.gov.my/Mqr/english/epapariptaAA.cfm?IDAkrKP=11992" target="_blank" class="doc-link" style="margin-top: 5px;">MQA/FA2688</a>
-                </div>
-                
-                <!-- MBOT Line covering 2022 to 2027 -->
-                <div class="acc-line mbot"></div>
-                <div class="acc-label mbot-lbl">
-                    <b>MBOT</b>
-                    <div style="color: black; padding: 3px;">01/01/2022 - 31/12/2027</div>
-                    <a href="https://www2.mqa.gov.my/Mqr/english/epapariptaAA.cfm?IDAkrKP=19965" target="_blank" class="doc-link" style="margin-top: 5px;">MQA/FA15894</a>
-                </div>
-            </div>
-        </div>
+    <div class="timeline-container">
 
-        <!-- Center Spine Column (Now houses the overlaid years) -->
-        <div class="spine-column">
-            <div class="spine-line"></div>
-            <div class="timeline-scale">
-                <div class="year-marker" style="margin-bottom: 15px;">2009</div>
-                <div class="program-marker" style="margin-bottom: 133px;">BCG</div>
-                <div class="year-marker" style="margin-bottom: 85px;">2011</div>
-                <div class="year-marker" style="margin-bottom: 410px;">2012</div>
-                <div class="year-marker" style="margin-bottom: 230px;">2013</div>
-                <div class="year-marker" style="margin-bottom: 185px;">2019</div>
-                <div class="year-marker" style="margin-bottom: 25px;">2021</div>
-                <div class="year-marker" style="margin-bottom: 3px;">2022</div>
-                <div class="year-marker" style="margin-bottom: 3px;">2023</div>
-                <div class="year-marker" style="margin-bottom: 685px;">2024</div>
-                <div class="program-marker" style="margin-bottom: 178px;">BCM</div>
-                <div class="year-marker" style="margin-bottom: 120px;">2025</div>
+        <!-- ROW 1: 2009 -->
+        <div class="timeline-row">
+            <div class="cell-acc"></div>
+            <div class="cell-spine">
+                <div class="program-marker" style="margin-bottom: 10px;">BCG</div>
+                <div class="year-marker">2009</div>
             </div>
-        </div>
-
-        <!-- Right Column: Milestones -->
-        <div class="milestone-column">
-            
-            <div class="milestone-row" style="margin-bottom: 0px; align-items: flex-end;">
-                <div class="horizontal-connector" style="margin-bottom: 70px;"></div>
+            <div class="cell-milestone">
+                <div class="horizontal-connector"></div>
                 <div class="milestone-box">
                     <div class="milestone-date">12 Mac 2009</div>
                     <div class="program-name-title">Sarjana Muda Sains Komputer (Teknologi Grafik & Multimedia)</div>
@@ -424,13 +345,20 @@
                     </a>
                 </div>
             </div>
+        </div>
 
-            <div class="milestone-row" style="margin-bottom: 10px;">
+        <!-- ROW 2: 3 Januari 2011 -->
+        <div class="timeline-row">
+            <div class="cell-acc"></div>
+            <div class="cell-spine">
+                <div class="year-marker">2011</div>
+            </div>
+            <div class="cell-milestone">
                 <div class="horizontal-connector"></div>
                 <div class="milestone-box">
                     <div class="milestone-date">3 Januari 2011</div>
                     <ul class="milestone-details">
-                        <li>JKPT - Memperakui kelulusan semakan kurikulum BCG mengikut keperluan Kerangka Kelayakan Malaysia (KKM/MQF)</li>
+                        <li>JKPT - Memperakui kelulusan semakan kurikulum BCG mengikut keperluan Kerangka Kelayakan Malaysia (MQF)</li>
                     </ul>
                     <a href="https://drive.google.com/file/d/154m8hBzWNMw_7O8JwlIX4PaOwN8r8QQj/view?usp=sharing" target="_blank" class="doc-link">
                         <svg width="14" height="14" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
@@ -438,8 +366,13 @@
                     </a>
                 </div>
             </div>
+        </div>
 
-            <div class="milestone-row" style="margin-bottom: 10px;">
+        <!-- ROW 3: 20 Mei 2011 -->
+        <div class="timeline-row">
+            <div class="cell-acc"></div>
+            <div class="cell-spine"></div> <!-- Sharing the 2011 year seamlessly -->
+            <div class="cell-milestone">
                 <div class="horizontal-connector"></div>
                 <div class="milestone-box">
                     <div class="milestone-date">20 Mei 2011</div>
@@ -457,11 +390,24 @@
                     </a>
                 </div>
             </div>
+        </div>
 
-            <div class="milestone-row" style="margin-bottom: 10px;">
+        <!-- ROW 4: 10 Ogos 2012 (Start of MQA) -->
+        <div class="timeline-row mqa-active mqa-start">
+            <div class="cell-acc">
+                <div class="acc-label mqa-lbl">
+                    <b>MQA</b> 
+                    <div style="color: black; padding: 3px;">01/08/2012 - 31/12/2021</div>
+                    <a href="https://www2.mqa.gov.my/Mqr/english/epapariptaAA.cfm?IDAkrKP=11992" target="_blank" class="doc-link" style="margin-top: 5px;">MQA/FA2688</a>
+                </div>
+            </div>
+            <div class="cell-spine">
+                <div class="year-marker">2012</div>
+            </div>
+            <div class="cell-milestone">
                 <div class="horizontal-connector"></div>
                 <div class="milestone-box">
-                    <div class="milestone-date">1 Ogos 2012</div>
+                    <div class="milestone-date">10 Ogos 2012</div>
                     <div class="program-name-title">MQA - Perakuan Akreditasi Sementara (PA)</div>
                     <div class="program-name-en">Bachelor of Computer Science (Graphics & Multimedia Technology) with Honours</div>
                     <ul class="milestone-details">
@@ -473,8 +419,15 @@
                     </a>
                 </div>
             </div>
+        </div>
 
-            <div class="milestone-row" style="margin-bottom: 10px;">
+        <!-- ROW 5: 30 Julai 2013 -->
+        <div class="timeline-row mqa-active">
+            <div class="cell-acc"></div>
+            <div class="cell-spine">
+                <div class="year-marker">2013</div>
+            </div>
+            <div class="cell-milestone">
                 <div class="horizontal-connector"></div>
                 <div class="milestone-box">
                     <div class="milestone-date">30 Julai 2013</div>
@@ -496,27 +449,69 @@
                     </a>
                 </div>
             </div>
+        </div>
 
-            <div class="milestone-row node-turquoise" style="margin-bottom: 10px;">
+        <!-- ROW 6: 1 Ogos 2019 -->
+        <div class="timeline-row mqa-active node-turquoise">
+            <div class="cell-acc"></div>
+            <div class="cell-spine">
+                <div class="year-marker" style="background-color:#25b2a4; border-color:#25b2a4;">2019</div>
+            </div>
+            <div class="cell-milestone">
                 <div class="horizontal-connector"></div>
-                <div class="milestone-box node-turquoise">
+                <div class="milestone-box">
                     <div class="milestone-date">1 Ogos 2019</div>
                     <div class="program-name-title">Fakulti Komputeran (FK)</div>
                     <div class="program-name-en"><b>Nama lama:</b> Fakulti Sistem Komputer & Kejuruteraan Perisian (FSKKP)</div>
-
                 </div>
             </div>
-            <div class="milestone-row node-turquoise" style="margin-bottom: 10px;">
+        </div>
+
+        <!-- ROW 7: 2021 (End of MQA Coverage) -->
+        <div class="timeline-row mqa-active mqa-end empty-milestone">
+            <div class="cell-acc"></div>
+            <div class="cell-spine">
+                <div class="year-marker">2021</div>
+            </div>
+            <div class="cell-milestone"></div>
+        </div>
+
+        <!-- ROW 8: 2022 (Start of MBOT Coverage) -->
+        <div class="timeline-row mbot-active mbot-start empty-milestone">
+            <div class="cell-acc">
+                <div class="acc-label mbot-lbl">
+                    <b>MBOT</b>
+                    <div style="color: black; padding: 3px;">01/01/2022 - 31/12/2027</div>
+                    <a href="https://www2.mqa.gov.my/Mqr/english/epapariptaAA.cfm?IDAkrKP=19965" target="_blank" class="doc-link" style="margin-top: 5px;">MQA/FA15894</a>
+                </div>
+            </div>
+            <div class="cell-spine">
+                <div class="year-marker">2022</div>
+            </div>
+            <div class="cell-milestone"></div>
+        </div>
+
+        <!-- ROW 9: 14 April 2023 -->
+        <div class="timeline-row mbot-active node-turquoise">
+            <div class="cell-acc"></div>
+            <div class="cell-spine">
+                <div class="year-marker" style="background-color:#25b2a4; border-color:#25b2a4;">2023</div>
+            </div>
+            <div class="cell-milestone">
                 <div class="horizontal-connector"></div>
-                <div class="milestone-box node-turquoise">
+                <div class="milestone-box">
                     <div class="milestone-date">14 April 2023</div>
                     <div class="program-name-title">Universiti Malaysia Pahang Al-Sultan Abdullah (UMPSA)</div>
                     <div class="program-name-en"><b>Nama lama:</b> Universiti Malaysia Pahang (UMP)</div>
-
                 </div>
             </div>
+        </div>
 
-            <div class="milestone-row" style="margin-bottom: 10px;">
+        <!-- ROW 10: 18 April 2023 -->
+        <div class="timeline-row mbot-active">
+            <div class="cell-acc"></div>
+            <div class="cell-spine"></div>
+            <div class="cell-milestone">
                 <div class="horizontal-connector"></div>
                 <div class="milestone-box">
                     <div class="milestone-date">18 April 2023</div>
@@ -545,8 +540,13 @@
                     </a>
                 </div>
             </div>
+        </div>
 
-            <div class="milestone-row" style="margin-bottom: 10px;">
+        <!-- ROW 11: 26 Jun 2023 -->
+        <div class="timeline-row mbot-active">
+            <div class="cell-acc"></div>
+            <div class="cell-spine"></div>
+            <div class="cell-milestone">
                 <div class="horizontal-connector"></div>
                 <div class="milestone-box">
                     <div class="milestone-date">26 Jun 2023</div>
@@ -565,8 +565,16 @@
                     </a>
                 </div>
             </div>
+        </div>
 
-            <div class="milestone-row" style="margin-bottom: 10px;">
+        <!-- ROW 12: 27 September 2024 -->
+        <div class="timeline-row mbot-active">
+            <div class="cell-acc"></div>
+            <div class="cell-spine">
+                <div class="program-marker" style="margin-bottom: 10px;">BCM</div>
+                <div class="year-marker">2024</div>
+            </div>
+            <div class="cell-milestone">
                 <div class="horizontal-connector"></div>
                 <div class="milestone-box">
                     <div class="milestone-date">27 September 2024</div>
@@ -586,8 +594,16 @@
                     </a>
                 </div>
             </div>
+        </div>
 
-            <div class="milestone-row" style="margin-bottom: 10px;">
+        <!-- ROW 13: 8 Oktober 2025 -->
+        <div class="timeline-row mbot-active">
+        <!-- <div class="timeline-row mbot-active mbot-end"> -->
+            <div class="cell-acc"></div>
+            <div class="cell-spine">
+                <div class="year-marker">2025</div>
+            </div>
+            <div class="cell-milestone">
                 <div class="horizontal-connector"></div>
                 <div class="milestone-box">
                     <div class="milestone-date">8 Oktober 2025</div>
@@ -608,74 +624,9 @@
                     </a>
                 </div>
             </div>
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <!-- <div class="milestone-row" style="margin-bottom: 240px;">
-                <div class="horizontal-connector"></div>
-                <div class="milestone-box">
-                    <div class="milestone-date">Julai 2009 / July 2009</div>
-                    <div class="program-name-title">Sarjana Muda Sains Komputer (Teknologi Grafik & Multimedia) - BCG</div>
-                    <div class="program-name-en">Bachelor of Computer Science (Graphics & Multimedia Technology)</div>
-                    <ul class="milestone-details">
-                        <li>Pengambilan pelajar sulung bagi struktur asal program. / First student intake for the original program structure.</li>
-                        <li>Fokus utama kepada pembangunan sistem grafik, animasi, dan aplikasi multimedia interaktif. / Primary focus on graphics systems, animation, and interactive multimedia applications.</li>
-                    </ul>
-                    <a href="#doc-2009" class="doc-link">
-                        <svg width="14" height="14" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-                        Dokumen Struktur Asal 2009.pdf
-                    </a>
-                </div>
-            </div>
-
-            <div class="milestone-row" style="margin-bottom: 280px;">
-                <div class="horizontal-connector"></div>
-                <div class="milestone-box">
-                    <div class="milestone-date">September 2016</div>
-                    <div class="program-name-title">Semakan Kurikulum / Curriculum Review</div>
-                    <ul class="milestone-details">
-                        <li>Kemaskini struktur program bagi memenuhi keperluan industri semasa dan standard MQA terkini. / Program structure update to align with current industry demands and latest MQA standards.</li>
-                        <li>Penyelarasan kredit kursus teras sains komputer dan pengenalan subjek elektif baharu. / Alignment of core computer science course credits and introduction of new elective subjects.</li>
-                        <li>Peningkatan bilangan unjuran pengambilan pelajar tahunan. / Increase in the annual student intake projection.</li>
-                    </ul>
-                    <a href="#doc-2016" class="doc-link">
-                        <svg width="14" height="14" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-                        Minit_Senat_Semakan_2016.pdf
-                    </a>
-                </div>
-            </div>
-
-            <div class="milestone-row node-change">
-                <div class="horizontal-connector"></div>
-                <div class="milestone-box node-change">
-                    <div class="milestone-date">September 2024</div>
-                    <div class="program-name-title">Sarjana Muda Sains Komputer (Perisian Multimedia) dengan Kepujian</div>
-                    <div class="program-name-en">Bachelor of Computer Science (Multimedia Software) with Honours</div>
-                    <ul class="milestone-details">
-                        <li><strong>Penjenamaan Semula & Perubahan Nama Program:</strong> Ditukar secara rasmi bagi mencerminkan penekanan yang lebih mendalam terhadap kejuruteraan perisian multimedia.</li>
-                        <li><strong>Perubahan Struktur Program:</strong> Integrasi elemen kecerdasan buatan (AI), realiti terimbuh (AR/VR), dan pengurusan projek perisian moden ke dalam kurikulum utama.</li>
-                        <li><strong>Kriteria Pengambilan:</strong> Pengenalan syarat kemasukan baharu sejajar dengan ketetapan standard profesional MBOT.</li>
-                    </ul>
-                    <a href="#doc-2024" class="doc-link">
-                        <svg width="14" height="14" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-                        Kelulusan_KPT_Penamaan_Semula_2024.pdf
-                    </a>
-                </div>
-            </div> -->
-
         </div>
+        
+
     </div>
 </div>
 
