@@ -251,6 +251,30 @@
             fill: currentColor;
         }
 
+        .doc-link-magenta {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 12px;
+            margin-right: 10px;
+            padding: 6px 12px;
+            background-color: rgb(255, 230, 255);
+            color: rgb(178, 0, 178);
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .doc-link-magenta:hover {
+            background-color: rgb(178, 0, 178);
+            color: #fff;
+        }
+        
+        .doc-link-magenta svg {
+            margin-right: 6px;
+            fill: currentColor;
+        }
+
         .new-item {
             all: unset;
             display: inline-block;
@@ -272,6 +296,11 @@
         .timeline-row.node-turquoise .milestone-date { color: rgb(37, 178, 164); }
         .timeline-row.node-turquoise .horizontal-connector { background-color: rgb(37, 178, 164); }
         .timeline-row.node-turquoise .horizontal-connector::before { background-color: rgb(37, 178, 164); }
+
+        .timeline-row.node-magenta .milestone-box { border-left-color: rgb(178, 0, 178); }
+        .timeline-row.node-magenta .milestone-date { color: rgb(178, 0, 178);; }
+        .timeline-row.node-magenta .horizontal-connector { background-color: rgb(178, 0, 178);; }
+        .timeline-row.node-magenta .horizontal-connector::before { background-color: rgb(178, 0, 178);; }
 
         /* Responsive Design */
         @media (max-width: 992px) {
@@ -320,7 +349,6 @@
 
     <div class="timeline-container">
 
-        <!-- ROW 1: 2009 -->
         <div class="timeline-row">
             <div class="cell-acc"></div>
             <div class="cell-spine">
@@ -331,13 +359,14 @@
                 <div class="horizontal-connector"></div>
                 <div class="milestone-box">
                     <div class="milestone-date">12 Mac 2009</div>
-                    <div class="program-name-title">Sarjana Muda Sains Komputer (Teknologi Grafik & Multimedia)</div>
+                    <div class="program-name-title">BCG - Sarjana Muda Sains Komputer (Teknologi Grafik & Multimedia)</div>
                     <div class="program-name-en">Bachelor of Computer Science (Graphics & Multimedia Technology)</div>
                     <ul class="milestone-details">
-                        <li>JKPT - Meluluskan permohonan penawaran program baru</li>
+                        <li><b>JKPT</b> - Meluluskan permohonan penawaran program baru</li>
                         <li>Diluluskan <b>mulai sesi pengajian Julai 2009/2010</b></li> 
                         <li>Tempoh pengajian: <b>7 semester</b> (3.5 tahun) - Sepenuh masa</li>
                         <li>Lokasi: <b>FSKKP</b>, UMP</li>
+                        <li>Semester bermula: <b>Semester I 2009/2010</b></li>
                     </ul>
                     <a href="https://drive.google.com/file/d/1clsuJv7G9jEqzSh2sDABENffcyVpx1Kb/view?usp=share_link" target="_blank" class="doc-link">
                         <svg width="14" height="14" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
@@ -347,7 +376,6 @@
             </div>
         </div>
 
-        <!-- ROW 2: 3 Januari 2011 -->
         <div class="timeline-row">
             <div class="cell-acc"></div>
             <div class="cell-spine">
@@ -358,7 +386,7 @@
                 <div class="milestone-box">
                     <div class="milestone-date">3 Januari 2011</div>
                     <ul class="milestone-details">
-                        <li>JKPT - Memperakui kelulusan semakan kurikulum BCG mengikut keperluan Kerangka Kelayakan Malaysia (MQF)</li>
+                        <li><b>JKPT</b> - Memperakui kelulusan semakan kurikulum BCG mengikut keperluan Kerangka Kelayakan Malaysia (MQF)</li>
                     </ul>
                     <a href="https://drive.google.com/file/d/154m8hBzWNMw_7O8JwlIX4PaOwN8r8QQj/view?usp=sharing" target="_blank" class="doc-link">
                         <svg width="14" height="14" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
@@ -368,7 +396,6 @@
             </div>
         </div>
 
-        <!-- ROW 3: 20 Mei 2011 -->
         <div class="timeline-row">
             <div class="cell-acc"></div>
             <div class="cell-spine"></div> <!-- Sharing the 2011 year seamlessly -->
@@ -376,13 +403,14 @@
                 <div class="horizontal-connector"></div>
                 <div class="milestone-box">
                     <div class="milestone-date">20 Mei 2011</div>
-                    <div class="program-name-title">Sarjana Muda Sains Komputer (Teknologi Grafik & Multimedia) dengan Kepujian</div>
+                    <div class="program-name-title">BCG - Sarjana Muda Sains Komputer (Teknologi Grafik & Multimedia) dengan Kepujian <span class="new-item">NEW</span></div>
                     <div class="program-name-en">Bachelor of Computer Science (Graphics & Multimedia Technology) with Honours</div>
                     <ul class="milestone-details">
-                        <li>JKPT - Meluluskan semakan kurikulum dan perubahan tempoh pengajian</li>
+                        <li><b>JKPT</b> - Meluluskan semakan kurikulum dan perubahan tempoh pengajian</li>
                         <li>Diluluskan <b>mulai sesi pengajian 2011/2012</b></li>
                         <li>Tempoh pengajian: <b>8 semester</b> (4 tahun) - Sepenuh masa <span class="new-item">NEW</span></li>
                         <li>Lokasi: <b>FSKKP</b>, UMP</li>
+                        <li>Semester bermula: <b>Semester I 2011/2012</b></li>
                     </ul>
                     <a href="https://drive.google.com/file/d/1Q6GZXJYS8k3AxLv1r0el4PIySxOuH9eF/view?usp=sharing" target="_blank" class="doc-link">
                         <svg width="14" height="14" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
@@ -392,7 +420,6 @@
             </div>
         </div>
 
-        <!-- ROW 4: 10 Ogos 2012 (Start of MQA) -->
         <div class="timeline-row mqa-active mqa-start">
             <div class="cell-acc">
             </div>
@@ -403,7 +430,7 @@
                 <div class="horizontal-connector"></div>
                 <div class="milestone-box">
                     <div class="milestone-date">10 Ogos 2012</div>
-                    <div class="program-name-title">MQA - Perakuan Akreditasi Sementara (PA)</div>
+                    <div class="program-name-title">MQA - Perakuan Akreditasi Sementara (PA) - BCG</div>
                     <div class="program-name-en">Bachelor of Computer Science (Graphics & Multimedia Technology) with Honours</div>
                     <ul class="milestone-details">
                         <li><b>MQA/PA2688</b> - Bermula 23 Julai 2012 hingga 31 Mac 2013</li>
@@ -416,7 +443,6 @@
             </div>
         </div>
 
-        <!-- ROW 5: 30 Julai 2013 -->
         <div class="timeline-row mqa-active">
             <div class="cell-acc">
                 <div class="acc-label mqa-lbl">
@@ -432,7 +458,7 @@
                 <div class="horizontal-connector"></div>
                 <div class="milestone-box">
                     <div class="milestone-date">30 Julai 2013</div>
-                    <div class="program-name-title">MQA - Perakuan Akreditasi Penuh (FA)</div>
+                    <div class="program-name-title">MQA - Perakuan Akreditasi Penuh (FA) - BCG</div>
                     <div class="program-name-en">Bachelor of Computer Science (Graphics & Multimedia Technology) with Honours</div>
                     <ul class="milestone-details">
                         <li><b>MQA/FA2688</b> (MQF Tahap 6) - Bermula 1 Ogos 2012</li>
@@ -452,7 +478,31 @@
             </div>
         </div>
 
-        <!-- ROW 6: 1 Ogos 2019 -->
+        <div class="timeline-row mqa-active node-magenta">
+            <div class="cell-acc"></div>
+            <div class="cell-spine">
+                <div class="year-marker">2016</div>
+            </div>
+            <div class="cell-milestone">
+                <div class="horizontal-connector"></div>
+                <div class="milestone-box">
+                    <div class="milestone-date">20 Januari 2016</div>
+                    <div class="program-name-title">SENAT - Kelulusan Cadangan Semakan Semula Kurikulum - BCG</div>
+                    <div class="program-name-en">SENAT ke-120 Bil. 1/2016</div>
+                    <ul class="milestone-details">
+                        <li>Justifikasi semakan: <b>Perubahan domain pengetahuan di dalam Standard Program Komputeran Malaysian Qualification Agency (MQA) dan Association for Computing Machinery (ACM)/IEEE Computer Society.</b></li>
+                        <li>Tempoh pengajian: <b>8 semester</b> (4 tahun) - Sepenuh masa</li>
+                        <li>Kredit bergraduat: <b>127</b> <span class="new-item">NEW</span> (menggantikan <b>122</b> sedia ada)</li>
+                        <li>Semester bermula: <b>Semester I 2016/2017</b></li>
+                    </ul>
+                    <a href="https://drive.google.com/file/d/1t6XgU0EmijrNOTvK6qMB_7yA_Tm4CT0E/view?usp=sharing" target="_blank" class="doc-link-magenta">
+                        <svg width="14" height="14" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                        Cabutan Minit.pdf
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <div class="timeline-row mqa-active node-turquoise">
             <div class="cell-acc"></div>
             <div class="cell-spine">
@@ -468,16 +518,122 @@
             </div>
         </div>
 
-        <!-- ROW 7: 2021 (End of MQA Coverage) -->
-        <div class="timeline-row mqa-active mqa-end empty-milestone">
+        <div class="timeline-row mqa-active">
+            <div class="cell-acc"></div>
+            <div class="cell-spine"></div>
+            <div class="cell-milestone">
+                <div class="horizontal-connector"></div>
+                <div class="milestone-box">
+                    <div class="milestone-date">12 September 2019</div>
+                    <div class="program-name-title">MQA - Penambahan Syarat Kelayakan Masuk dalam Standard Program: Komputeran</div>
+                    <div class="program-name-en"></div>
+                    <ul class="milestone-details">
+                        <li><b>Kredit/kepujian</b> dalam mata pelajaran <b>Matematik Tambahan di peringkat SPM atau setara dikekalkan</b></li>
+                        <li>Beberapa penambahan pilihan kelayakan masuk lain (rujuk Surat MQA)</li>
+                    </ul>
+                    <a href="https://drive.google.com/file/d/15x6rvp7D7mk0IVwnZx6UgfqCGGE_06NO/view?usp=sharing" target="_blank" class="doc-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                        Surat MQA.pdf
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-row mqa-active node-magenta">
+            <div class="cell-acc"></div>
+            <div class="cell-spine">
+                <div class="year-marker">2020</div>
+            </div>
+            <div class="cell-milestone">
+                <div class="horizontal-connector"></div>
+                <div class="milestone-box">
+                    <div class="milestone-date">23 September 2020</div>
+                    <div class="program-name-title">SENAT/MMPA - Kelulusan Permohonan Perubahan Jumlah Kredit Bergraduat - BCG</div>
+                    <div class="program-name-en">SENAT ke-168 Bil. 11/2020, MMPA ke-103 Bil. 9/2020</div>
+                    <ul class="milestone-details">
+                        <li>Justifikasi permohonan: <b>Penambahan kursus Intermediate Mathematics (BUM1153) bagi memenuhi keperluan Surat Pekeliling MQA Bil. 4/2019 (12 September 2019)</b></li>
+                        <li>Kredit bergraduat: <b>130</b> <span class="new-item">NEW</span> (menggantikan <b>127</b> sedia ada)</li>
+                        <li>Semester bermula: <b>Semester I 2020/2021</b></li>
+                    </ul>
+                    <a href="https://drive.google.com/file/d/1j4bW-OciB_toAI4ojusrazaFGlsELgSs/view?usp=sharing" target="_blank" class="doc-link-magenta">
+                        <svg width="14" height="14" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                        Cabutan Minit.pdf
+                    </a>
+                    <a href="https://drive.google.com/file/d/15x6rvp7D7mk0IVwnZx6UgfqCGGE_06NO/view?usp=sharing" target="_blank" class="doc-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                        Surat MQA.pdf
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="timeline-row mqa-active empty-milestone">
             <div class="cell-acc"></div>
             <div class="cell-spine">
                 <div class="year-marker">2021</div>
             </div>
             <div class="cell-milestone"></div>
+        </div> -->
+
+        <div class="timeline-row mqa-active">
+            <div class="cell-acc"></div>
+            <div class="cell-spine">
+                <div class="year-marker">2021</div>
+            </div>
+            <div class="cell-milestone">
+                <div class="horizontal-connector"></div>
+                <div class="milestone-box">
+                    <div class="milestone-date">20 Januari 2021</div>
+                    <div class="program-name-title">MBOT - Kelulusan Peralihan dan Perakuan Program Profesional - BCG</div>
+                    <div class="program-name-en">Melayakkan graduan untuk berdaftar sebagai Juruteknik Berkelayakan (QT) / Graduan Teknologis (GT)</div>
+                    <ul class="milestone-details">
+                        <li>Kod program: <b>MBOT/PR/IT/0/02/0038</b></li>
+                        <li>Status akreditasi: <b>Akreditasi Penuh MQA</b></li>
+                        <li>Bidang MBOT: <b>Information and Computing Technology (IT)</b></li>
+                        <li>Tempoh program: <b>Kelulusan bagi kohort bergraduasi sehingga tahun 2021</b></li>
+                    </ul>
+                    <a href="https://drive.google.com/file/d/1EUP1R2nGfjEDD58qSyKxDrALc_WTIKuE/view?usp=sharing" target="_blank" class="doc-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                        Surat MBOT.pdf
+                    </a>
+                </div>
+            </div>
         </div>
 
-        <!-- ROW 8: 2022 (Start of MBOT Coverage) -->
+        <div class="timeline-row mqa-active node-magenta">
+            <div class="cell-acc"></div>
+            <div class="cell-spine"></div>
+            <div class="cell-milestone">
+                <div class="horizontal-connector"></div>
+                <div class="milestone-box">
+                    <div class="milestone-date">25 Mei 2021</div>
+                    <div class="program-name-title">SENAT - Kelulusan Permohonan Semakan Kurikulum - BCG</div>
+                    <div class="program-name-en">SENAT ke-181 Bil. 8/2021</div>
+                    <ul class="milestone-details">
+                        <li>Justifikasi semakan: <b>Mengikut standard keperluan MBOT (peralihan dari MQA kepada MBOT)</b>. Perubahan daripada <b>BCG</b> kepada <b>BCM</b>.</li>
+                        <li>Tempoh pengajian: <b>8 semester</b> (4 tahun) - Sepenuh masa</li>
+                        <li>Kredit bergraduat: <b>126 (BCM)</b> <span class="new-item">NEW</span> (menggantikan <b>130 (BCG)</b> sedia ada)</li>
+                    </ul>
+                    <a href="https://drive.google.com/file/d/1AreQ-tjFn8G1GZfbQLy9zPlBxAOccYST/view?usp=sharing" target="_blank" class="doc-link-magenta">
+                        <svg width="14" height="14" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                        Cabutan Minit.pdf
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Vt9dfarTda6cFtkYwC8i02GmnFXpSwbL/view?usp=sharing" target="_blank" class="doc-link-magenta">
+                        <svg width="14" height="14" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                        Perbandingan Struktur BCG - BCM.pdf
+                    </a>
+                    <a href="https://drive.google.com/file/d/1xmjgXDL-MSI_vgG7pqRi6cNYgCDhQYqZ/view?usp=sharing" target="_blank" class="doc-link-magenta">
+                        <svg width="14" height="14" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                        Table 15.pdf
+                    </a>
+                    <a href="https://drive.google.com/file/d/1rktFtqZcZgYN9hIKzmS6xiNkRdVoCwIZ/view?usp=sharing" target="_blank" class="doc-link-magenta">
+                        <svg width="14" height="14" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                        Justifikasi Perbandingan BCG - BCM.pdf
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <div class="timeline-row mbot-active mbot-start empty-milestone">
             <div class="cell-acc">
             </div>
@@ -487,7 +643,26 @@
             <div class="cell-milestone"></div>
         </div>
 
-        <!-- ROW 9: 14 April 2023 -->
+        <div class="timeline-row mbot-active">
+            <div class="cell-acc"></div>
+            <div class="cell-spine"></div>
+            <div class="cell-milestone">
+                <div class="horizontal-connector"></div>
+                <div class="milestone-box">
+                    <div class="milestone-date">28 Mac 2022</div>
+                    <div class="program-name-title">MQA - Permohonan Bagi Perakuan Akreditasi Program - BCG</div>
+                    <div class="program-name-en">Bachelor of Computer Science (Graphics & Multimedia Technology) with Honours</div>
+                    <ul class="milestone-details">
+                        <li>Serahan dokumen permohonan akreditasi <b>untuk tujuan penilaian MBOT</b></li>
+                    </ul>
+                    <a href="https://drive.google.com/file/d/159QmvQje7c164qk9stuTVTe1gekhnEuD/view?usp=sharing" target="_blank" class="doc-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                        Borang permohonan MQA.pdf
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <div class="timeline-row mbot-active node-turquoise">
             <div class="cell-acc"></div>
             <div class="cell-spine">
@@ -503,7 +678,6 @@
             </div>
         </div>
 
-        <!-- ROW 10: 18 April 2023 -->
         <div class="timeline-row mbot-active">
             <div class="cell-acc"></div>
             <div class="cell-spine"></div>
@@ -511,16 +685,16 @@
                 <div class="horizontal-connector"></div>
                 <div class="milestone-box">
                     <div class="milestone-date">18 April 2023</div>
-                    <div class="program-name-title">MBOT - Kelulusan Akreditasi Penuh (FA)</div>
+                    <div class="program-name-title">MBOT - Kelulusan Akreditasi Penuh (FA) - BCG</div>
                     <div class="program-name-en">Bachelor of Computer Science (Graphics & Multimedia Technology) with Honours</div>
                     <ul class="milestone-details">
-                        <li><b>MBOT/FA/IT/0/02/0019</b></li>
-                        <li><b>Bermula kohort bergraduasi tahun 2022 hingga tahun 2025</b></li>
+                        <li>Kod program: <b>MBOT/FA/IT/0/02/0019</b></li>
                         <li>Bidang MBOT: <b>Information and Communication Technology (IT)</b></li>
                         <li>NEC: <b>0613 - Computer Science</b></li>
                         <li>Tempoh pengajian: <b>8 semester</b> (4 tahun) - Sepenuh masa</li>
-                        <li>Kredit bergraduat: <b>130</b> <span class="new-item">NEW</span></li>
+                        <li>Kredit bergraduat: <b>130</b></li>
                         <li>Jenis penganugerahan: <b>Single major</b></li>
+                        <li>Tempoh program: <b>Kelulusan bermula kohort bergraduasi tahun 2022 sehingga tahun 2025</b></li>
                     </ul>
                     <a href="https://drive.google.com/file/d/1JAmpYxHlYXBC1RODIyAaLc6Ms531yM7y/view?usp=sharing" target="_blank" class="doc-link">
                         <svg width="14" height="14" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
@@ -538,7 +712,6 @@
             </div>
         </div>
 
-        <!-- ROW 11: 26 Jun 2023 -->
         <div class="timeline-row mbot-active">
             <div class="cell-acc">
                 <div class="acc-label mbot-lbl">
@@ -552,7 +725,7 @@
                 <div class="horizontal-connector"></div>
                 <div class="milestone-box">
                     <div class="milestone-date">26 Jun 2023</div>
-                    <div class="program-name-title">MQA - Perakuan Akreditasi Penuh (FA)</div>
+                    <div class="program-name-title">MQA - Perakuan Akreditasi Penuh (FA) - BCG</div>
                     <div class="program-name-en">Bachelor of Computer Science (Graphics & Multimedia Technology) with Honours</div>
                     <ul class="milestone-details">
                         <li><b>MQA/FA15894</b> - Bermula 1 Januari 2022 hingga 31 Disember 2025</li>
@@ -569,7 +742,6 @@
             </div>
         </div>
 
-        <!-- ROW 12: 27 September 2024 -->
         <div class="timeline-row mbot-active">
             <div class="cell-acc"></div>
             <div class="cell-spine">
@@ -580,15 +752,15 @@
                 <div class="horizontal-connector"></div>
                 <div class="milestone-box">
                     <div class="milestone-date">27 September 2024</div>
-                    <div class="program-name-title">Sarjana Muda Sains Komputer (Perisian Multimedia) dengan Kepujian <span class="new-item">NEW</span></div>
+                    <div class="program-name-title">BCM - Sarjana Muda Sains Komputer (Perisian Multimedia) dengan Kepujian <span class="new-item">NEW</span></div>
                     <div class="program-name-en">Bachelor of Computer Science (Multimedia Software) with Honours</div>
                     <ul class="milestone-details">
-                        <li>JKPT - Meluluskan perubahan maklumat program akademik</li>
-                        <li>Sesi penawaran: <b>Semester 1 Sesi 2024/2025</b></li>
+                        <li><b>JKPT</b> - Meluluskan <b>Semakan Kurikulum: Perubahan Maklumat Program Akademik</b></li>
                         <li>NEC: <b>0613 - Computer Science</b></li>
                         <li>Tempoh pengajian: <b>8 semester</b> (4 tahun) - Sepenuh masa</li>
-                        <li>Kredit bergraduat: <b>126</b> <span class="new-item">NEW</span></li>
+                        <li>Kredit bergraduat: <b>126</b></li>
                         <li>Lokasi: <b>FK</b>, UMPSA (Pekan)</li>
+                        <li>Semester bermula: <b>Semester 1 2024/2025</b></li>
                     </ul>
                     <a href="https://drive.google.com/file/d/1x5NQV5_BDZj_JNocNpY4h_ILZYTAYxD1/view?usp=sharing" target="_blank" class="doc-link">
                         <svg width="14" height="14" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
@@ -598,7 +770,6 @@
             </div>
         </div>
 
-        <!-- ROW 13: 8 Oktober 2025 -->
         <div class="timeline-row mbot-active">
         <!-- <div class="timeline-row mbot-active mbot-end"> -->
             <div class="cell-acc"></div>
@@ -609,7 +780,7 @@
                 <div class="horizontal-connector"></div>
                 <div class="milestone-box">
                     <div class="milestone-date">8 Oktober 2025</div>
-                    <div class="program-name-title">MBOT - Penerusan Akreditasi (Tambahan 2 tahun)</div>
+                    <div class="program-name-title">MBOT - Penerusan Akreditasi (Tambahan 2 tahun) - BCM</div>
                     <div class="program-name-en">Bachelor of Computer Science (Multimedia Software) with Honours</div>
                     <ul class="milestone-details">
                         <li>MBOT/FA/IT/0/02/0019</li>
